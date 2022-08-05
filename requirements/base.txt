@@ -1,5 +1,8 @@
 # Flask
 # ------------------------------------------------------------------------------
 Flask == 2.2.0  # https://github.com/pallets/flask/
+Flask-SQLAlchemy == 2.5.1  # https://github.com/pallets-eco/flask-sqlalchemy
+Flask-WTF == 1.0.1  # https://github.com/wtforms/flask-wtf/
+Flask-Login == 0.6.2  # https://github.com/maxcountryman/flask-login
 
 # Third party

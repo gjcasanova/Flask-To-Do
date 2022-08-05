@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} {{super()}} | Lists {% endblock %}
+
+{% block body %}
+<form action="/app/lists/new/" method="POST">
+    {{ list_form.csrf_token }}
+    {{ list_form.name.label }}
+    {{ list_form.name }}
+    {{ list_form.details.label }}
+    {{ list_form.details }}
+    {{ list_form.submit }}
+</form>
+{% endblock %}
