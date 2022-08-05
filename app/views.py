@@ -5,13 +5,13 @@ from flask import Blueprint, Response, make_response, redirect, render_template,
 from flask_login import current_user, login_user
 
 from app.forms import ListForm, SignInForm
-# from app.models import User
+from app.models import User
 
 
-tasks_urls = Blueprint('tasks', __name__)
+app_routes = Blueprint('tasks', __name__)
 
 
-@tasks_urls.route('/sign_in/', methods=['GET', 'POST'])
+@app_routes.route('/sign_in/', methods=['GET', 'POST'])
 def sign_in():
     """Authenticate a user and start a session."""
     sign_in_form = SignInForm()
@@ -20,6 +20,7 @@ def sign_in():
     }
     if sign_in_form.validate_on_submit():
         data = sign_in_form.data
+        print(data)
         # user = User.query.filter_by(username=data.get('username'), password=data.get('password')).first()
         # if user:
         #     login_user(user, remember=False)
@@ -30,7 +31,7 @@ def sign_in():
     return 'Sign In'
 
 
-@tasks_urls.route('/lists/new/', methods=['GET', 'POST'])
+@app_routes.route('/lists/new/', methods=['GET', 'POST'])
 def new_list():
     """Create a new list."""
     print(current_user.name)
