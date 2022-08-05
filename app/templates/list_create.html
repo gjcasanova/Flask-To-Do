@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %} {{super()}} | Lists {% endblock %}
+{% block title %} {{super()}} | New list {% endblock %}
 
 {% block body %}
-<form action="/app/lists/new/" method="POST">
+<h1>New list</h1>
+<form action="{{ url_for('tasks.create_list') }}" method="POST">
     {{ list_form.csrf_token }}
     {{ list_form.name.label }}
     {{ list_form.name }}

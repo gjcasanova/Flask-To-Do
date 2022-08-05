@@ -2,7 +2,17 @@
 
 {% block title %} {{super()}} | Lists {% endblock %}
 
-{% block body %} 
-    {{ current_user.name }}
-    
+{% block body %}
+<h1>My lists</h1>
+
+<a href="{{ url_for('tasks.create_list') }}">New List</a>
+
+{% for list in lists %}
+<li>
+    <a href="{{ url_for('tasks.retrieve_list', list_id=list.id) }}">{{ list.name }}</a>
+    <form action="{{ url_for('tasks.destroy_list', list_id=list.id) }}" method="POST">
+        <button type="submit">Remove</button>
+    </form>
+</li>
+{% endfor %}
 {% endblock %}
