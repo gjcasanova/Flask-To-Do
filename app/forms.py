@@ -39,5 +39,5 @@ class TaskForm(FlaskForm):
 
     name = wtforms.StringField('name', validators=[wtforms.validators.DataRequired()])
     details = wtforms.StringField('details')
-    due_date = wtforms.DateTimeField('due date')
+    due_date = wtforms.DateTimeField('due date', validators=[wtforms.validators.Optional()])
     submit = wtforms.SubmitField('submit')

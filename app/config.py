@@ -12,7 +12,9 @@ class Config:
     Settings to App package.
     """
 
+    ENV = 'development'
     DEBUG = True
+    TESTING = True
     SECRET_KEY = 'eHSgKycMopOvwFRxUzcXckyBo0Gp4C66'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{BASE_DIR / 'database.sqlite'}"

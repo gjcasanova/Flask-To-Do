@@ -14,8 +14,14 @@
 </form>
 
 <h2>Taks</h2>
+<a href="{{ url_for('tasks.create_task', list_id=list.id) }}">New task</a>
 {% for task in list.tasks %}
-<li>{{ task.name }}</li>
+<li>
+    <a href="{{ url_for('tasks.retrieve_task', list_id=list.id, task_id=task.id) }}">{{ task.name }}</a>
+    <form action="{{ url_for('tasks.destroy_task', list_id=list.id, task_id=task.id) }}" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+</li>
 {% endfor %}
 
 {% endblock %}

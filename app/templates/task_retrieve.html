@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} {{super()}} | Task retrieve {% endblock %}
+
+{% block body %}
+<h1>{{ list.name }}</h1>
+<form action="{{ url_for('tasks.retrieve_task', list_id=list.id, task_id=task.id) }}" method="POST">
+    {{ task_form.csrf_token }}
+    {{ task_form.name.label }}
+    {{ task_form.name(value=task.name) }}
+    {{ task_form.details.label }}
+    {{ task_form.details(value=task.details) }}
+    {{ task_form.due_date.label }}
+    {{ task_form.due_date(value= task.due_date if task.due_date else '') }}
+    {{ task_form.submit }}
+</form>
+
+{% endblock %}
