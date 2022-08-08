@@ -1,15 +1,28 @@
+<!doctype html>
 <html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tasks{% endblock %}</title>
-</head>
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        {% endblock %}
 
-<body>
-    {% block body %}
-    {% endblock %}
-</body>
+        <title>{% block title %}Tasks{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Your page content -->
+        {% block content %}{% endblock %}
 
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
 </html>

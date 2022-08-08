@@ -1,18 +1,19 @@
 {% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'macros.html' import navbar %}
 
 {% block title %} {{super()}} | Task retrieve {% endblock %}
 
 {% block body %}
-<h1>{{ list.name }}</h1>
-<form action="{{ url_for('tasks.retrieve_task', list_id=list.id, task_id=task.id) }}" method="POST">
-    {{ task_form.csrf_token }}
-    {{ task_form.name.label }}
-    {{ task_form.name(value=task.name) }}
-    {{ task_form.details.label }}
-    {{ task_form.details(value=task.details) }}
-    {{ task_form.due_date.label }}
-    {{ task_form.due_date(value= task.due_date if task.due_date else '') }}
-    {{ task_form.submit }}
-</form>
-
+{% block content %}
+{{ navbar(current_user) }}
+<div class="container">
+    <br><br>
+    <h1 class="h1 fs-3">Task details</h1>
+    <div class="p-2 flex-grow-1">
+        {{ render_form(task_form, method='post', action=url_for('tasks.retrieve_task', list_id=list.id,
+        task_id=task.id)) }}
+    </div>
+</div>
+{% endblock %}
 {% endblock %}

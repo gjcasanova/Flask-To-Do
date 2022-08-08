@@ -14,7 +14,8 @@ def create_app(config_class):
 
 def register_plugins(flask_app):
     """Register the plugins in the application context."""
-    from .plugins import db, login_manager  # noqa
+    from .plugins import bootstrap, db, login_manager  # noqa
+
     # Database
     db.init_app(flask_app)
     with flask_app.app_context():
@@ -22,6 +23,8 @@ def register_plugins(flask_app):
     # Login manager
     login_manager.login_view = 'tasks.sign_in'
     login_manager.init_app(flask_app)
+    # Bootstrap
+    bootstrap.init_app(flask_app)
 
     @login_manager.user_loader
     def load_user(user_id):

@@ -1,18 +1,36 @@
 {% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'macros.html' import navbar %}
 
 {% block title %} {{super()}} | Lists {% endblock %}
 
 {% block body %}
-<h1>My lists</h1>
-
-<a href="{{ url_for('tasks.create_list') }}">New List</a>
-
-{% for list in lists %}
-<li>
-    <a href="{{ url_for('tasks.retrieve_list', list_id=list.id) }}">{{ list.name }}</a>
-    <form action="{{ url_for('tasks.destroy_list', list_id=list.id) }}" method="POST">
-        <button type="submit">Remove</button>
-    </form>
-</li>
-{% endfor %}
+{% block content %}
+{{ navbar(current_user) }}
+<div class="container">
+    <br><br>
+    <div class="d-flex justify-content-between">
+        <h1 class="h1 fs-3">My lists</h1>
+        <a class="btn btn-primary" href="{{ url_for('tasks.create_list') }}">New list</a>
+    </div>
+    <br><br>
+    <table class="table">
+        <tbody>
+            {% for list in lists %}
+            <tr>
+                <th>
+                    <a class="ligther fs-6 text-decoration-none" href="{{ url_for('tasks.retrieve_list', list_id=list.id) }}">{{ list.name }}</a>
+                    <p class="fw-lighter">{{ list.details }}</p>
+                </th>
+                <td>
+                    <form class="badge" action="{{ url_for('tasks.destroy_list', list_id=list.id) }}" method="POST">
+                        <button class="btn btn-danger" type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
 {% endblock %}

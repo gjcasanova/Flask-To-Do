@@ -1,15 +1,18 @@
 {% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'macros.html' import navbar %}
 
-{% block title %} {{super()}} | New list {% endblock %}
+{% block title %} {{ super() }} | New list {% endblock %}
 
 {% block body %}
-<h1>New list</h1>
-<form action="{{ url_for('tasks.create_list') }}" method="POST">
-    {{ list_form.csrf_token }}
-    {{ list_form.name.label }}
-    {{ list_form.name }}
-    {{ list_form.details.label }}
-    {{ list_form.details }}
-    {{ list_form.submit }}
-</form>
+{% block content %}
+{{ navbar(current_user) }}
+<div class="container">
+    <br><br>
+    <h1 class="h1 fs-3">New list</h1>
+    <div class="p-2 flex-grow-1">
+        {{ render_form(list_form, method='post', action=url_for('tasks.create_list')) }}
+    </div>
+</div>
+{% endblock %}
 {% endblock %}

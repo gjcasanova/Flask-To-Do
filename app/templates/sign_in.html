@@ -1,15 +1,17 @@
 {% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'macros.html' import navbar %}
 
 {% block title %} {{super()}} | Sign In {% endblock %}
 
 {% block body %}
-<h1>Sign in</h1>
-<form action="{{ url_for('tasks.sign_in') }}" method="POST">
-    {{ sign_in_form.csrf_token }}
-    {{ sign_in_form.username.label }}
-    {{ sign_in_form.username }}
-    {{ sign_in_form.password.label }}
-    {{ sign_in_form.password }}
-    {{ sign_in_form.submit }}
-</form>
+{% block content %}
+<div class="container">
+    <br><br>
+    <h1 class="h1 fs-3">Sign in</h1>
+    <div class="p-2 flex-grow-1">
+        {{ render_form(sign_in_form, method='post', action=url_for('tasks.sign_in')) }}
+    </div>
+</div>
+{% endblock %}
 {% endblock %}

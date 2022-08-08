@@ -24,7 +24,7 @@ class List(db.Model):
     """
     List.
 
-    Model to representate a list of tasks. Each list is related with its owner and 
+    Model to representate a list of tasks. Each list is related with its owner and
     it can have many tasks.
     """
 
@@ -32,7 +32,7 @@ class List(db.Model):
     name = db.Column(db.String(50), nullable=False)
     details = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('User', backref=db.backref('lists', lazy=True))
+    user = db.relationship('User', backref=db.backref('lists', lazy=True, cascade='all, delete-orphan'))
 
 
 class Task(db.Model):
@@ -48,4 +48,4 @@ class Task(db.Model):
     is_finished = db.Column(db.Boolean, default=False)
     due_date = db.Column(db.DateTime)
     list_id = db.Column(db.Integer, db.ForeignKey('list.id'), nullable=False)
-    list = db.relationship('List', backref=db.backref('tasks', lazy=True))
+    list = db.relationship('List', backref=db.backref('tasks', lazy=True, cascade='all, delete-orphan'))

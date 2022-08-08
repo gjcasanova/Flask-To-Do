@@ -13,9 +13,9 @@ class SignInForm(FlaskForm):
     Provide a form to sign in with username and password.
     """
 
-    username = wtforms.StringField('username', validators=[wtforms.validators.DataRequired()])
-    password = wtforms.PasswordField('password')
-    submit = wtforms.SubmitField('submit')
+    username = wtforms.StringField('Username', validators=[wtforms.validators.DataRequired()])
+    password = wtforms.PasswordField('Password')
+    submit = wtforms.SubmitField('Submit')
 
 
 class ListForm(FlaskForm):
@@ -25,9 +25,9 @@ class ListForm(FlaskForm):
     Provide a form to create and update a list.
     """
 
-    name = wtforms.StringField('name', validators=[wtforms.validators.DataRequired()])
-    details = wtforms.StringField('details')
-    submit = wtforms.SubmitField('submit')
+    name = wtforms.StringField('Name', validators=[wtforms.validators.DataRequired()])
+    details = wtforms.StringField('Details')
+    submit = wtforms.SubmitField('Submit')
 
 
 class TaskForm(FlaskForm):
@@ -37,7 +37,8 @@ class TaskForm(FlaskForm):
     Provide a form to create and update a task.
     """
 
-    name = wtforms.StringField('name', validators=[wtforms.validators.DataRequired()])
-    details = wtforms.StringField('details')
-    due_date = wtforms.DateTimeField('due date', validators=[wtforms.validators.Optional()])
-    submit = wtforms.SubmitField('submit')
+    name = wtforms.StringField('Name', validators=[wtforms.validators.DataRequired()])
+    details = wtforms.StringField('Details')
+    due_date = wtforms.DateTimeField('Due date', validators=[wtforms.validators.Optional()])
+    is_finished = wtforms.BooleanField('Finished')
+    submit = wtforms.SubmitField('Submit')

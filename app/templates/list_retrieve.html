@@ -1,27 +1,46 @@
 {% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% from 'macros.html' import navbar %}
 
-{% block title %} {{super()}} | New list {% endblock %}
+{% block title %} {{super()}} | Retrieve list {% endblock %}
 
 {% block body %}
-<h1>{{ list.name }}</h1>
-<form action="{{ url_for('tasks.retrieve_list', list_id=list.id) }}" method="POST">
-    {{ list_form.csrf_token }}
-    {{ list_form.name.label }}
-    {{ list_form.name(value=list.name) }}
-    {{ list_form.details.label }}
-    {{ list_form.details(value=list.details) }}
-    {{ list_form.submit }}
-</form>
+{% block content %}
+{{ navbar(current_user) }}
+<div class="container">
+    <br><br>
+    <h1 class="h1 fs-3">List details</h1>
+    <div class="p-2 flex-grow-1">
+        {{ render_form(list_form, method='post', action=url_for('tasks.retrieve_list', list_id=list.id)) }}
+    </div>
+    <br><br>
 
-<h2>Taks</h2>
-<a href="{{ url_for('tasks.create_task', list_id=list.id) }}">New task</a>
-{% for task in list.tasks %}
-<li>
-    <a href="{{ url_for('tasks.retrieve_task', list_id=list.id, task_id=task.id) }}">{{ task.name }}</a>
-    <form action="{{ url_for('tasks.destroy_task', list_id=list.id, task_id=task.id) }}" method="POST">
-        <button type="submit">Delete</button>
-    </form>
-</li>
-{% endfor %}
-
+    <div class="d-flex justify-content-between">
+        <h1 class="h1 fs-3">Tasks</h1>
+        <a class="btn btn-primary" href="{{ url_for('tasks.create_task', list_id=list.id) }}">New task</a>
+    </div>
+    <br>
+    <table class="table">
+        <tbody>
+            {% for task in list.tasks %}
+            <tr>
+                <th>
+                    {% if task.is_finished %}
+                    <a class="ligther fs-6 text-decoration-line-through" href="{{ url_for('tasks.retrieve_task', list_id=list.id, task_id=task.id) }}">{{ task.name }}</a>
+                    {% else %}
+                    <a class="ligther fs-6 text-decoration-none" href="{{ url_for('tasks.retrieve_task', list_id=list.id, task_id=task.id) }}">{{ task.name }}</a>
+                    {% endif %}
+                    <p class="fw-lighter">{{ task.details }}</p>
+                </th>
+                <td>
+                    <form action="{{ url_for('tasks.destroy_task', list_id=list.id, task_id=task.id) }}" method="POST">
+                        <button class="btn btn-danger" type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
 {% endblock %}
